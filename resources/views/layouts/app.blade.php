@@ -60,6 +60,12 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    
+                                    @can('admin')
+                                    <a class="dropdown-item" href="{{ route('admin.users.index') }}">
+                                        Users Management
+                                    </a>
+                                    @endcan
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

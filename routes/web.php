@@ -18,3 +18,24 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+#Admin panel
+
+$groupDate = [
+	'namespace' =>'Admin',
+	'prefix' => 'admin',
+	'middleware' => 'can:admin',
+];
+
+Route::group($groupDate, function(){
+
+	$exceptActions = [
+		'show',
+		'create',
+		'store',
+	];
+
+	Route::resource('users', 'UserController')
+		 ->except($exceptActions)
+		 ->names('admin.users');
+});
